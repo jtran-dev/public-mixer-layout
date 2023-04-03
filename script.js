@@ -100,9 +100,7 @@ const addVideoNode = (participant, stream) => {
             .appendTo(participantNode);
 
         // Add a temporary banner with the name of the participant
-        //let name = $("<p />").text(participant.info.name);
-        let layout = $("#layoutType").val
-        let name = $("<p />").text(layout);
+        let name = $("<p />").text(participant.info.name);
         let bannerName = $("<div />")
             .addClass("name-banner")
             .append(name)
@@ -193,8 +191,10 @@ $(document).ready(() => {
     if (layoutType === "stream" || layoutType === "hls") {
         // Display the live message for the live streams
         $("#live").removeClass("hide");
+        let layoutText = $("<p />").text(layoutType);
+        $("#live").append(layoutText);
     }
-    alert("layout type:" + layoutType);
+
     console.log("layout"+ layoutType);
     // Inform the mixer that the application is ready to start
     $("<div />").attr("id", "conferenceStartedVoxeet").appendTo("body");
