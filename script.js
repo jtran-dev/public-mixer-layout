@@ -192,35 +192,36 @@ $(document).ready(() => {
         // Display the live message for the live streams
         $("#live").removeClass("hide");
     }
-
+    alert("layout type:" + layoutType);
+    console.log("layout"+ layoutType);
     // Inform the mixer that the application is ready to start
     $("<div />").attr("id", "conferenceStartedVoxeet").appendTo("body");
 
 
-    // // Initialize the SDK
-    // // Please read the documentation at:
-    // // https://docs.dolby.io/communications-apis/docs/initializing-javascript
-    // // Insert your client access token (from the Dolby.io dashboard) and conference id
-    // const clientAccessToken = "CLIENT_ACCESS_TOKEN";
-    // const conferenceId = "CONFERENCE_ID";
+    // Initialize the SDK
+    // Please read the documentation at:
+    // https://docs.dolby.io/communications-apis/docs/initializing-javascript
+    // Insert your client access token (from the Dolby.io dashboard) and conference id
+    const clientAccessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpc3MiOiJkb2xieS5pbyIsImlhdCI6MTY3OTk3MDMzMCwic3ViIjoibmtWOUx1V3Q0Z1NvOFBiVkRQM3NVQT09Iiwib2lkIjoiOTU5MmY1ZmMtZjdjYS00MjkxLWE3ZTEtMzdiYTk5NzExZTBjIiwiYmlkIjoiOGEzNjk1OTg4NmRhYzRlOTAxODZkZDQ4YTI3NDRhNjkiLCJhaWQiOiI2MjJmZmYxYS02MWYxLTRlODMtOWFlMy01MzE5NzgwNjJiMDgiLCJhdXRob3JpdGllcyI6WyJST0xFX0NVU1RPTUVSIl0sInRhcmdldCI6InNlc3Npb24iLCJleHAiOjE2ODAwMTM1MzB9.aWZirSFNYsdm5YIr9wdCoH3REy8OCS4zhr6H4KJbWFhRnQkJh8CSUOuGaSOnEcE_-MdZlFl_cx7ORg26EfGMoQ";
+    const conferenceId = "testing";
 
-    // VoxeetSDK.initializeToken(clientAccessToken, (isExpired) => {
-    //     return new Promise((resolve, reject) => {
-    //         if (isExpired) {
-    //             reject('The client access token has expired.');
-    //         } else {
-    //             resolve(clientAccessToken);
-    //         }
-    //     });
-    // });
+    VoxeetSDK.initializeToken(clientAccessToken, (isExpired) => {
+        return new Promise((resolve, reject) => {
+            if (isExpired) {
+                reject('The client access token has expired.');
+            } else {
+                resolve(clientAccessToken);
+            }
+        });
+    });
 
-    // const mixer = { name: "Test", externalId: "Test" };
-    // const joinOptions = { constraints: { video: false, audio: false } };
+    const mixer = { name: "Test", externalId: "Test" };
+    const joinOptions = { constraints: { video: false, audio: false } };
     
-    // // Open a session for the mixer
-    // VoxeetSDK.session.open(mixer)
-    //     .then(() => VoxeetSDK.conference.fetch(conferenceId))
-    //     // Join the conference
-    //     .then((conference) => VoxeetSDK.conference.join(conference, joinOptions))
-    //     .catch((err) => console.error(err));
+    // Open a session for the mixer
+    VoxeetSDK.session.open(mixer)
+        .then(() => VoxeetSDK.conference.fetch(conferenceId))
+        // Join the conference
+        .then((conference) => VoxeetSDK.conference.join(conference, joinOptions))
+        .catch((err) => console.error(err));
 });
