@@ -100,7 +100,9 @@ const addVideoNode = (participant, stream) => {
             .appendTo(participantNode);
 
         // Add a temporary banner with the name of the participant
-        let name = $("<p />").text(participant.info.name);
+        //let name = $("<p />").text(participant.info.name);
+        let layout = $("#layoutType").val
+        let name = $("<p />").text(layout);
         let bannerName = $("<div />")
             .addClass("name-banner")
             .append(name)
@@ -187,7 +189,7 @@ $(document).ready(() => {
     $("#joinConference").click(joinConference);
     $("#replayConference").click(replayConference);
     
-    const layoutType = $("layoutType").val();
+    const layoutType = $("#layoutType").val();
     if (layoutType === "stream" || layoutType === "hls") {
         // Display the live message for the live streams
         $("#live").removeClass("hide");
